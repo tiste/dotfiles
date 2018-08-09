@@ -10,7 +10,7 @@
   gpgsign = true
 
 [help]
-  autocorrect = 1
+  autocorrect = 15
 
 [alias]
   fixup = !sh -c 'SHA=$(git rev-parse $1) \

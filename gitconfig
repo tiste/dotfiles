@@ -1,0 +1,19 @@
+[user]
+  name = Baptiste Lecocq
+  email = baptiste.lecocq@gmail.com
+  signingkey = 0D63D365CE9918F1
+
+[push]
+  default = simple
+
+[commit]
+  gpgsign = true
+
+[alias]
+  fixup = !sh -c 'SHA=$(git rev-parse $1) \
+          && git commit --fixup $SHA \
+          && git rebase -i --autosquash $SHA~' -
+
+  dammit = !BRANCH=$(git rev-parse --abbrev-ref HEAD) \
+    && git fetch origin $BRANCH \
+    && git reset --hard origin/$BRANCH

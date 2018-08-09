@@ -9,6 +9,9 @@
 [commit]
   gpgsign = true
 
+[help]
+  autocorrect = 1
+
 [alias]
   fixup = !sh -c 'SHA=$(git rev-parse $1) \
           && git commit --fixup $SHA \

@@ -1,13 +1,15 @@
 #!/bin/bash
 
+set -euo pipefail
+
 print_success() {
     # Print output in green
-    printf "\e[0;32m  [✔] $1\e[0m\n"
+    printf "\e[0;32m  [✔] %s\e[0m\n" "$1"
 }
 
 print_info() {
     # Print output in purple
-    printf "\e[0;35m $1\e[0m\n"
+    printf "\e[0;35m %s\e[0m\n" "$1"
 }
 
 create_link() {
@@ -22,14 +24,15 @@ create_link() {
     fi
 }
 
-declare -a FILES_TO_SYMLINK=$(find . -type f -maxdepth 1 -not -name .editorconfig -not -name .gitignore -not -name "*.sh" | sed -e "s|./||")
+declare -a FILES_TO_SYMLINK
+FILES_TO_SYMLINK=($(find . -type f -maxdepth 1 -not -name .editorconfig -not -name .gitignore -not -name README.md -not -name "*.sh" | sed -e "s|./||"))
 
-for file in $FILES_TO_SYMLINK; do
+for file in "${FILES_TO_SYMLINK[@]}"; do
     create_link "$PWD/$file" "$HOME/.$file"
 done
 
 echo ""
-read -p "Brew? (y/n) " -n 1
+read -rp "Brew? (y/n) " -n 1
 echo ""
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     ./brew.sh

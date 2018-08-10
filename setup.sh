@@ -20,7 +20,7 @@ create_link() {
     if ! [ -L "$DEST" ]; then
         ln -isv "$SRC" "$DEST"
     else
-        print_info "Skipping, link already exists: $DEST"
+        print_info "Skipping, symlink already exists: $DEST"
     fi
 }
 
@@ -32,8 +32,8 @@ for file in "${FILES_TO_SYMLINK[@]}"; do
 done
 
 echo ""
-read -rp "Brew? (y/n) " -n 1
+read -rp "Update OSX defaults? (y/n) " -n 1
 echo ""
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    ./brew.sh
+    ./osx.sh
 fi

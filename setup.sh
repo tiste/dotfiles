@@ -17,12 +17,17 @@ create_link() {
     local -r DEST=$2
 
     mkdir -p "$(dirname "$DEST")"
-    if ! [ -L "$DEST" ]; then
+    if ! [ -L "$DEST" ] || [ "$FORCE" = true ]; then
         ln -isv "$SRC" "$DEST"
     else
         print_info "Skipping, symlink already exists: $DEST"
     fi
 }
+
+FORCE=false
+if [ "$#" -gt 0 ] && { [ "$1" == "--force" ] || [ "$1" == "-f" ]; }; then
+    FORCE=true
+fi
 
 declare -a FILES_TO_SYMLINK
 FILES_TO_SYMLINK=($(find . -type f -maxdepth 1 -not -name .editorconfig -not -name .gitignore -not -name README.md -not -name "*.sh" | sed -e "s|./||"))

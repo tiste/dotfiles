@@ -31,6 +31,8 @@ for file in "${FILES_TO_SYMLINK[@]}"; do
     create_link "$PWD/$file" "$HOME/.$file"
 done
 
+create_link "$PWD/prefs/spectacle.json" "$HOME/Library/Application Support/Spectacle/Shortcuts.json"
+
 echo ""
 read -rp "Update OSX defaults? (y/n) " -n 1
 echo ""

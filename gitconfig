@@ -3,6 +3,9 @@
   email = baptiste.lecocq@gmail.com
   signingkey = 0D63D365CE9918F1
 
+[core]
+  pager = diff-so-fancy | less
+
 [push]
   default = simple
 

@@ -14,7 +14,7 @@ antigen bundle history-substring-search
 antigen bundle chrissicool/zsh-256color
 antigen bundle tomsquest/nvm-auto-use.zsh
 
-antigen theme avit
+antigen theme denysdovhan/spaceship-prompt
 
 antigen apply
 

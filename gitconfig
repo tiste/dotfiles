@@ -16,10 +16,12 @@
   autocorrect = 15
 
 [alias]
+  dammit = !BRANCH=$(git rev-parse --abbrev-ref HEAD) \
+      && git fetch origin $BRANCH \
+      && git reset --hard origin/$BRANCH
+
   fixup = !sh -c 'SHA=$(git rev-parse $1) \
           && git commit --fixup $SHA \
           && git rebase -i --autosquash $SHA~' -
 
-  dammit = !BRANCH=$(git rev-parse --abbrev-ref HEAD) \
-    && git fetch origin $BRANCH \
-    && git reset --hard origin/$BRANCH
+  pr = !sh -c 'git log $1..master --ancestry-path --merges --oneline | tail -n1 ' -

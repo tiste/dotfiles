@@ -37,6 +37,7 @@ for file in "${FILES_TO_SYMLINK[@]}"; do
 done
 
 create_link "$PWD/prefs/spectacle.json" "$HOME/Library/Application Support/Spectacle/Shortcuts.json"
+create_link "$PWD/prefs/sublime-text.json" "$HOME/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings"
 
 echo ""
 read -rp "Update OSX defaults? (y/n) " -n 1

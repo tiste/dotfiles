@@ -16,6 +16,8 @@
   autocorrect = 15
 
 [alias]
+  bam = commit --amend --no-edit
+
   dammit = !BRANCH=$(git rev-parse --abbrev-ref HEAD) \
       && git fetch origin $BRANCH \
       && git reset --hard origin/$BRANCH

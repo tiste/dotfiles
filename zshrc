@@ -2,7 +2,7 @@ source /usr/local/share/antigen/antigen.zsh
 
 antigen use oh-my-zsh
 
-for file in ~/.{aliases,exports}; do
+for file in $HOME/.{aliases,exports}; do
     [ -r "$file" ] && source "$file"
 done
 unset file
@@ -23,7 +23,10 @@ antigen theme denysdovhan/spaceship-prompt
 
 antigen apply
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh"
 
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"
+
+[ -f "$GCLOUD_DIR/path.zsh.inc" ] && source "$GCLOUD_DIR/path.zsh.inc"
+[ -f "$GCLOUD_DIR/completion.zsh.inc" ] && source "$GCLOUD_DIR/completion.zsh.inc"

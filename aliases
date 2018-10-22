@@ -1,1 +1,2 @@
+alias ggbam="git commit --amend --no-edit"
 alias ia="open $1 -a /Applications/iA\ Writer.app"

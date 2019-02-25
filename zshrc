@@ -23,6 +23,8 @@ antigen theme denysdovhan/spaceship-prompt
 
 antigen apply
 
+eval "$(pyenv init -)"
+
 [ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh"
 
 [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"

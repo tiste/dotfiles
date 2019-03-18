@@ -22,6 +22,6 @@
 
   fixup = !sh -c 'SHA=$(git rev-parse $1) \
           && git commit --fixup $SHA \
-          && git rebase -i --autosquash $SHA~' -
+          && GIT_SEQUENCE_EDITOR=true git rebase -i --autosquash $SHA~' -
 
   pr = !sh -c 'git log $1..master --ancestry-path --merges --oneline | tail -n1 ' -

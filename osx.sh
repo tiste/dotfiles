@@ -52,6 +52,12 @@ defaults write NSGlobalDomain com.apple.trackpad.scaling -int 3
 # Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 
+# Enable path bar in Finder
+defaults write com.apple.finder ShowPathbar -int 1
+
+# Enable status bar in Finder
+defaults write com.apple.finder ShowStatusBar -int 1
+
 # Set the icon size of Dock items to 42 pixels
 defaults write com.apple.dock tilesize -int 42
 

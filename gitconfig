@@ -16,7 +16,7 @@
   autocorrect = 15
 
 [alias]
-  clear = "!f() { git branch -vv | grep -E ': disparue|gone]' | awk '{print $1}' | xargs git branch -D ; }; f"
+  clear = "!f() { git fetch -p && git branch -vv | grep -E ': disparue|gone]' | awk '{print $1}' | xargs git branch -D ; }; f"
 
   dammit = !BRANCH=$(git rev-parse --abbrev-ref HEAD) \
       && git fetch origin $BRANCH \

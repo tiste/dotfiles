@@ -26,4 +26,13 @@
           && git commit --fixup $SHA \
           && GIT_SEQUENCE_EDITOR=true git rebase -i --autosquash $SHA~' -
 
-  pr = !sh -c 'git log $1..master --ancestry-path --merges --oneline | tail -n1 ' -
+  rerebase = !sh -c 'BASE=$1 \
+              && BRANCH=$(git rev-parse --abbrev-ref HEAD) \
+              && BASE_COMMIT=$(git rev-list --abbrev-commit --reverse $BASE..$BRANCH | head -n 1) \
+              && git fetch origin $BASE \
+              && git stash \
+              && git checkout $BASE \
+              && git reset --hard origin/$BASE \
+              && git checkout - \
+              && git rebase $BASE_COMMIT~ --onto $BASE \
+              && echo "Please unstash your previous changes."' -

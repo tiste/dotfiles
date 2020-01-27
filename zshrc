@@ -24,6 +24,7 @@ antigen theme denysdovhan/spaceship-prompt
 antigen apply
 
 eval "$(pyenv init -)"
+eval "$(direnv hook zsh)"
 
 [ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh"
 

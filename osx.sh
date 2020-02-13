@@ -64,6 +64,9 @@ defaults write com.apple.dock tilesize -int 42
 # Automatically hide and show the Dock
 defaults write com.apple.dock autohide -bool true
 
+# Sort folders by name
+/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:ExtendedListViewSettings:sortColumn name" ~/Library/Preferences/com.apple.finder.plist
+
 for app in "Dock" "Finder"; do
     killall "${app}" &> /dev/null
 done

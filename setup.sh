@@ -30,7 +30,7 @@ if [ "$#" -gt 0 ] && { [ "$1" == "--force" ] || [ "$1" == "-f" ]; }; then
 fi
 
 declare -a FILES_TO_SYMLINK
-FILES_TO_SYMLINK=($(find . -type f -maxdepth 1 -not -name .editorconfig -not -name .gitignore -not -name README.md -not -name "*.sh" | sed -e "s|./||"))
+FILES_TO_SYMLINK=($(find . -type f -maxdepth 1 -not -name .editorconfig -not -name .gitignore -not -name README.md -not -name Brewfile -not -name "*.sh" | sed -e "s|./||"))
 
 for file in "${FILES_TO_SYMLINK[@]}"; do
     create_link "$PWD/$file" "$HOME/.$file"
@@ -38,6 +38,7 @@ done
 
 create_link "$PWD/prefs/spectacle.json" "$HOME/Library/Application Support/Spectacle/Shortcuts.json"
 create_link "$PWD/prefs/sublime-text.json" "$HOME/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings"
+create_link "$PWD/Brewfile" "$HOME/Brewfile"
 
 echo ""
 read -rp "Update OSX defaults? (y/n) " -n 1

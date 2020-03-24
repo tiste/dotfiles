@@ -16,6 +16,7 @@ brew "htop"
 brew "httpie"
 brew "jenv"
 brew "jq"
+brew "jmeter"
 brew "mas"
 brew "mongodb-community@4.2", restart_service: true
 brew "pinentry-mac"

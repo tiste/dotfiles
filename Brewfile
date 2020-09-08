@@ -57,6 +57,7 @@ cask "sublime-text"
 cask "the-unarchiver"
 cask "visual-studio-code"
 cask "vlc"
+cask "zoomus"
 
 mas "Pixelmator Pro", id: 1289583905
 mas "Amphetamine", id: 937984704

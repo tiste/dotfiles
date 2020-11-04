@@ -13,6 +13,7 @@ antigen bundle z
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions
+antigen bundle lukechilds/zsh-better-npm-completion
 antigen bundle history-substring-search
 antigen bundle chrissicool/zsh-256color
 antigen bundle tomsquest/nvm-auto-use.zsh
@@ -31,3 +32,5 @@ eval "$(direnv hook zsh)"
 
 [ -f "$GCLOUD_DIR/path.zsh.inc" ] && source "$GCLOUD_DIR/path.zsh.inc"
 [ -f "$GCLOUD_DIR/completion.zsh.inc" ] && source "$GCLOUD_DIR/completion.zsh.inc"
+
+source "$HOME/.antigen/bundles/lukechilds/zsh-better-npm-completion/zsh-better-npm-completion.plugin.zsh"

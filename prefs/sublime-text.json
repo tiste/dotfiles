@@ -1,6 +1,11 @@
 {
 	"color_scheme": "Packages/Color Scheme - Default/Breakers.sublime-color-scheme",
 	"ensure_newline_at_eof_on_save": true,
+	"font_size": 12,
+	"ignored_packages":
+	[
+		"Vintage"
+	],
 	"tab_size": 4,
 	"theme": "Adaptive.sublime-theme",
 	"translate_tabs_to_spaces": true,

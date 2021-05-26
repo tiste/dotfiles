@@ -22,7 +22,7 @@ antigen theme refined
 
 antigen apply
 
-eval "$(pyenv init -)"
+eval "$(pyenv init --path)"
 eval "$(direnv hook zsh)"
 
 [ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh"

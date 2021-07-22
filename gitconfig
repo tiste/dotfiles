@@ -1,19 +1,12 @@
 [user]
-  name = Baptiste Lecocq
-  email = baptiste.lecocq@gmail.com
-  signingkey = 0D63D365CE9918F1
+	email = chunpeng@hotmail.fr
+	name = Chunpeng XING
 
 [core]
   pager = diff-so-fancy | less
 
 [push]
   default = simple
-
-[commit]
-  gpgsign = true
-
-[gpg]
-  program = /usr/local/bin/gpg
 
 [help]
   autocorrect = 15

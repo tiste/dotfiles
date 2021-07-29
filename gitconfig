@@ -2,9 +2,6 @@
 	email = chunpeng@hotmail.fr
 	name = Chunpeng XING
 
-[core]
-  pager = diff-so-fancy | less
-
 [push]
   default = simple
 
@@ -32,3 +29,5 @@
               && git checkout - \
               && git rebase $BASE_COMMIT~ --onto $BASE \
               && echo "Please unstash your previous changes."' -
+[core]
+	editor = nano

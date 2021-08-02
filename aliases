@@ -1,1 +1,2 @@
 alias ia="open $1 -a /Applications/iA\ Writer.app"
+alias opus="$HOME/Workspace/opus-cli/dist/cli.js"

@@ -62,7 +62,8 @@ cask "visual-studio-code"
 cask "vlc"
 cask "zoom"
 
-mas "Pixelmator Pro", id: 1289583905
 mas "Amphetamine", id: 937984704
-mas "Pocket", id: 568494494
+mas "GoodNotes", id: 1444383602
 mas "iA Writer", id: 775737590
+mas "Pixelmator Pro", id: 1289583905
+mas "Pocket", id: 568494494

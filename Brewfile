@@ -3,7 +3,6 @@ tap "heroku/brew"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-drivers"
-tap "mongodb/brew"
 
 brew "antigen"
 brew "diff-so-fancy"
@@ -21,9 +20,7 @@ brew "jenv"
 brew "jmeter"
 brew "jq"
 brew "mas"
-brew "mongodb-community@4.2", restart_service: true
 brew "pinentry-mac"
-brew "postgresql", restart_service: true
 brew "pyenv"
 
 cask "1password"

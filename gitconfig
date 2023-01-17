@@ -1,7 +1,7 @@
 [user]
   name = Baptiste Lecocq
   email = baptiste.lecocq@gmail.com
-  signingkey = 0D63D365CE9918F1
+  signingkey = FD19E776F5B7CBDC
 
 [core]
   pager = diff-so-fancy | less

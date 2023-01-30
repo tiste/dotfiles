@@ -28,7 +28,6 @@ brew "pyenv"
 
 cask "1password"
 cask "1password-cli"
-cask "adobe-acrobat-reader"
 cask "appcleaner"
 cask "brave-browser"
 cask "discord"

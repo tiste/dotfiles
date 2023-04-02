@@ -58,6 +58,7 @@ cask "vlc"
 
 mas "Amphetamine", id: 937984704
 mas "GoodNotes", id: 1444383602
-mas "iA Writer", id: 775737590
 mas "Pixelmator Pro", id: 1289583905
 mas "Pocket", id: 568494494
+mas "Transporter", id: 1450874784
+mas "iA Writer", id: 775737590

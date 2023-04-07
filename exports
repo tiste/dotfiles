@@ -1,5 +1,5 @@
 export LC_ALL="en_US.UTF-8"
-export VISUAL="vim"
+export VISUAL="nano"
 export EDITOR="$VISUAL"
 export GPG_TTY=$(tty)
 export DEFAULT_USER="tiste"

@@ -56,6 +56,7 @@ cask "sublime-text"
 cask "temurin"
 cask "the-unarchiver"
 cask "vlc"
+cask "warp"
 
 mas "Amphetamine", id: 937984704
 mas "GoodNotes", id: 1444383602

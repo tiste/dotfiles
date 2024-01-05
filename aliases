@@ -1,2 +1,33 @@
 alias ia="open $1 -a /Applications/iA\ Writer.app"
 alias opus="$HOME/Workspace/opus-cli/dist/cli.js"
+
+function redirect() {
+  for tld in ${@:2}; do
+    for protocol in http https; do
+      url="${protocol}://${1}${tld}"
+      while true; do
+        echo "Test de $url"
+        output=$(curl -I -s -o /dev/null -w "%{http_code} %{url_effective}\n" "$url")
+        code=$(echo $output | cut -d' ' -f1)
+        next_url=$(echo $output | cut -d' ' -f2-)
+
+        echo "Status code: $code"
+        if [[ "$code" != "301" && "$code" != "302" && "$code" != "303" && "$code" != "307" && "$code" != "308" ]]; then
+          break
+        fi
+
+        if [[ "$next_url" == "$url" ]]; then
+          break
+        fi
+
+        url="$next_url"
+      done
+    done
+    echo "\n\n"
+  done
+}
+
+function redirect-follow() {
+  for tld in ${@:2}; do for protocol in http https; do echo "Test de $protocol://$1$tld"; curl -I -L -s -o /dev/null -w "%{url_effective}\n\n" "$protocol://$1$tld"; done; done
+}
+

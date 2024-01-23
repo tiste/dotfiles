@@ -25,6 +25,7 @@ antigen apply
 
 eval "$(pyenv init --path)"
 eval "$(direnv hook zsh)"
+eval "$(jenv init -)"
 
 [ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh"
 

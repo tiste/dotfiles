@@ -9,6 +9,11 @@ export NVM_DIR="$HOME/.nvm"
 export GCLOUD_DIR="$HOME/.gcloud"
 export GOOGLE_APPLICATION_CREDENTIALS="$HOME/.gcloud/credentials.json"
 
+export GOPATH=$HOME/go
+export GOROOT=$HOMEBREW_CELLAR/go/1.22.4/libexec
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
+
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/tools

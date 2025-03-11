@@ -26,6 +26,7 @@ brew "kubectx"
 brew "mas"
 brew "pinentry-mac"
 brew "pyenv"
+brew "pyenv-virtualenv"
 
 cask "1password"
 cask "1password-cli"
@@ -64,3 +65,6 @@ mas "Pixelmator Pro", id: 1289583905
 mas "Pocket", id: 568494494
 mas "Transporter", id: 1450874784
 mas "iA Writer", id: 775737590
+mas "Transmit 5", id: 1436522307
+mas "CleanMyMac", id: 1339170533
+mas "EXIF Tool : Metadata Tool", id: 1493735407

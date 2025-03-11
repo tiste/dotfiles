@@ -1,1 +1,5 @@
 save-exact=true
+@adeo:registry=https://adeo.jfrog.io/artifactory/api/npm/npm
+//adeo.jfrog.io/artifactory/api/npm/npm/:_authToken=${ADEO_NODE_AUTH_TOKEN}
+//adeo.jfrog.io/artifactory/api/npm/npm/:email=baptiste.lecocq@ext.adeo.com
+//adeo.jfrog.io/artifactory/api/npm/npm/:always-auth=true

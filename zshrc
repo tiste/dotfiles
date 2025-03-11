@@ -24,6 +24,8 @@ antigen theme refined
 antigen apply
 
 eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 eval "$(direnv hook zsh)"
 eval "$(jenv init -)"
 

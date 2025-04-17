@@ -1,5 +1,6 @@
 alias ia="open $1 -a /Applications/iA\ Writer.app"
 alias opus="$HOME/Workspace/opus-cli/dist/cli.js"
+alias idea='open -na "IntelliJ IDEA.app" --args '
 
 function redirect() {
   for tld in ${@:2}; do

@@ -1,11 +1,7 @@
-tap "conduktor/brew"
+tap "hashicorp/tap"
 tap "heroku/brew"
-tap "homebrew/bundle"
-tap "homebrew/cask"
-tap "homebrew/cask-drivers"
 
 brew "antigen"
-brew "conduktor"
 brew "diff-so-fancy"
 brew "direnv"
 brew "fzf"
@@ -26,7 +22,7 @@ brew "kubectx"
 brew "mas"
 brew "pinentry-mac"
 brew "pyenv"
-brew "pyenv-virtualenv"
+brew "hashicorp/tap/vault"
 
 cask "1password"
 cask "1password-cli"
@@ -34,7 +30,6 @@ cask "appcleaner"
 cask "brave-browser"
 cask "discord"
 cask "docker"
-cask "google-chrome"
 cask "google-cloud-sdk"
 cask "google-drive"
 cask "imageoptim"
@@ -57,9 +52,7 @@ cask "the-unarchiver"
 cask "vlc"
 
 mas "Amphetamine", id: 937984704
-mas "GoodNotes", id: 1444383602
 mas "Pixelmator Pro", id: 1289583905
-mas "Pocket", id: 568494494
 mas "Transporter", id: 1450874784
 mas "Transmit 5", id: 1436522307
 mas "CleanMyMac", id: 1339170533

@@ -4,7 +4,7 @@ export EDITOR="$VISUAL"
 export GPG_TTY=$(tty)
 export DEFAULT_USER="tiste"
 export PATH="$PATH:$HOME/.rvm/bin"
-export NVM_DIR="$HOME/.nvm"
+export NVM_DIR="$HOME/nvm"
 
 export GCLOUD_DIR="$HOME/.gcloud"
 export GOOGLE_APPLICATION_CREDENTIALS="$HOME/.gcloud/credentials.json"

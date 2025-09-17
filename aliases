@@ -1,6 +1,7 @@
 alias ia="open $1 -a /Applications/iA\ Writer.app"
 alias opus="$HOME/Workspace/opus-cli/dist/cli.js"
 alias idea='open -na "IntelliJ IDEA.app" --args '
+alias format-java='find . -name "*.java" -type f -print | xargs java -jar $GDRIVE_DIR/Work/Adeo/Dev/google-java-format.jar --replace'
 
 function redirect() {
   for tld in ${@:2}; do

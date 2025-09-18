@@ -21,6 +21,7 @@ brew "kubectl"
 brew "kubectx"
 brew "mas"
 brew "pinentry-mac"
+brew "pipx"
 brew "pyenv"
 brew "hashicorp/tap/vault"
 

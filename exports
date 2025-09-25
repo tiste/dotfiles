@@ -8,8 +8,8 @@ export PATH="$PATH:$HOME/.local/bin"
 export NVM_DIR="$HOME/nvm"
 
 export GDRIVE_DIR="$HOME/Mon Drive"
-export GCLOUD_DIR="$HOME/.gcloud"
-export GOOGLE_APPLICATION_CREDENTIALS="$HOME/.gcloud/credentials.json"
+export GCLOUD_DIR="$HOME/.config/gcloud"
+export GOOGLE_APPLICATION_CREDENTIALS="$GCLOUD_DIR/application_default_credentials.json"
 
 export GOPATH=$HOME/go
 export GOROOT=$HOMEBREW_CELLAR/go/1.22.4/libexec

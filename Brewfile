@@ -54,6 +54,7 @@ cask "sublime-text"
 cask "temurin"
 cask "the-unarchiver"
 cask "vlc"
+cask "whatsapp"
 
 mas "Amphetamine", id: 937984704
 mas "Pixelmator Pro", id: 1289583905

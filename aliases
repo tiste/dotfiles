@@ -4,32 +4,32 @@ alias idea='open -na "IntelliJ IDEA.app" --args '
 alias format-java='find . -name "*.java" -type f -print | xargs java -jar $GDRIVE_DIR/Work/Adeo/Dev/google-java-format.jar --replace'
 
 function redirect() {
-  for tld in ${@:2}; do
-    for protocol in http https; do
-      url="${protocol}://${1}${tld}"
-      while true; do
-        echo "Test de $url"
-        output=$(curl -I -s -o /dev/null -w "%{http_code} %{url_effective}\n" "$url")
-        code=$(echo $output | cut -d' ' -f1)
-        next_url=$(echo $output | cut -d' ' -f2-)
-
-        echo "Status code: $code"
-        if [[ "$code" != "301" && "$code" != "302" && "$code" != "303" && "$code" != "307" && "$code" != "308" ]]; then
-          break
-        fi
-
-        if [[ "$next_url" == "$url" ]]; then
-          break
-        fi
-
-        url="$next_url"
-      done
-    done
-    echo "\n\n"
-  done
+  local url="$1"
+  if [ -z "$url" ]; then
+    echo "Usage: check_redirect <url>"
+    return 1
+  fi
+  echo "🔍 Vérification des redirections pour : $url"
+  echo "-------------------------------------------"
+  curl -s -L -I -o - "$url" | \
+    grep -iE "^(HTTP/|Location:)" | \
+    sed 's/\r$//' | \
+    awk '
+      /^HTTP\// {
+        code=$2
+        if (code != "200") {
+          printf "➡️  Code: %s\n", code
+        } else {
+          printf "✅ Code: %s (final)\n", code
+        }
+      }
+      /^Location:/ {
+        url=$2
+        printf "   ↳ %s\n", url
+      }
+    '
+  echo "-------------------------------------------"
+  local final
+  final=$(curl -s -I -L -o /dev/null -w "%{url_effective}" "$url")
+  echo "🌐 URL finale : $final"
 }
-
-function redirect-follow() {
-  for tld in ${@:2}; do for protocol in http https; do echo "Test de $protocol://$1$tld"; curl -I -L -s -o /dev/null -w "%{url_effective}\n\n" "$protocol://$1$tld"; done; done
-}
-

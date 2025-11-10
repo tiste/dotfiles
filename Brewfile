@@ -29,6 +29,7 @@ brew "hashicorp/tap/vault"
 
 cask "1password"
 cask "1password-cli"
+cask "android-studio"
 cask "appcleaner"
 cask "brave-browser"
 cask "bruno"

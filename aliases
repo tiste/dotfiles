@@ -33,3 +33,128 @@ function redirect() {
   final=$(curl -s -I -L -o /dev/null -w "%{url_effective}" "$url")
   echo "🌐 URL finale : $final"
 }
+
+function resize-images() {
+  local pattern="$1"
+  local max_size="$2"
+
+  if [ -z "$pattern" ] || [ -z "$max_size" ]; then
+    echo "Usage: resize-images <glob-pattern> <max-dimension>"
+    echo "Exemple: resize-images '*.jpg' 1000"
+    echo ""
+    echo "Redimensionne les images en respectant le ratio."
+    echo "La dimension max s'applique à la hauteur ou largeur (la plus grande)."
+    return 1
+  fi
+
+  # Utiliser 'magick' (ImageMagick 7+) ou 'convert' (ImageMagick 6)
+  local cmd="magick"
+  if ! command -v magick &> /dev/null; then
+    cmd="convert"
+  fi
+
+  local count=0
+  local processed=0
+
+  echo "🖼️  Redimensionnement des images : $pattern (max: ${max_size}px)"
+  echo "-------------------------------------------"
+
+  # Utiliser un tableau pour gérer les noms de fichiers avec espaces
+  local files=()
+  for file in ${~pattern}; do
+    if [ -f "$file" ]; then
+      files+=("$file")
+    fi
+  done
+
+  if [ ${#files[@]} -eq 0 ]; then
+    echo "❌ Aucun fichier trouvé correspondant à : $pattern"
+    return 1
+  fi
+
+  for file in "${files[@]}"; do
+    count=$((count + 1))
+    echo "📷 [$count/${#files[@]}] $file"
+
+    if $cmd "$file" -resize "${max_size}x${max_size}>" "$file" 2>/dev/null; then
+      echo "   ✅ Redimensionné"
+      processed=$((processed + 1))
+    else
+      echo "   ❌ Erreur lors du traitement"
+    fi
+  done
+
+  echo "-------------------------------------------"
+  echo "✨ Terminé : $processed/$count images redimensionnées"
+}
+
+function convert-to-jpg() {
+  local pattern="$1"
+  local quality="${2:-90}"
+
+  if [ -z "$pattern" ]; then
+    echo "Usage: convert-to-jpg <glob-pattern> [quality]"
+    echo "Exemple: convert-to-jpg '*.png'"
+    echo "         convert-to-jpg '*.heic' 85"
+    echo ""
+    echo "Convertit les images (PNG, HEIC, WEBP, etc.) en JPG."
+    echo "Qualité par défaut: 90 (1-100)"
+    return 1
+  fi
+
+  # Utiliser 'magick' (ImageMagick 7+) ou 'convert' (ImageMagick 6)
+  local cmd="magick"
+  if ! command -v magick &> /dev/null; then
+    cmd="convert"
+  fi
+
+  local count=0
+  local processed=0
+
+  echo "🔄 Conversion en JPG : $pattern (qualité: ${quality}%)"
+  echo "-------------------------------------------"
+
+  local files=()
+  for file in ${~pattern}; do
+    if [ -f "$file" ]; then
+      files+=("$file")
+    fi
+  done
+
+  if [ ${#files[@]} -eq 0 ]; then
+    echo "❌ Aucun fichier trouvé correspondant à : $pattern"
+    return 1
+  fi
+
+  for file in "${files[@]}"; do
+    count=$((count + 1))
+
+    local dir=$(dirname "$file")
+    local filename=$(basename "$file")
+    local name="${filename%.*}"
+    local ext="${filename##*.}"
+    local output="${dir}/${name}.jpg"
+
+    # Si le fichier est déjà un jpg, on le saute
+    if [[ "${ext:l}" == "jpg" ]] || [[ "${ext:l}" == "jpeg" ]]; then
+      echo "⏭️  [$count/${#files[@]}] $file (déjà en JPG)"
+      continue
+    fi
+
+    echo "🖼️  [$count/${#files[@]}] $file → ${name}.jpg"
+
+    if $cmd "$file" -quality "$quality" "$output" 2>/dev/null; then
+      echo "   ✅ Converti"
+      processed=$((processed + 1))
+
+      # Supprimer le fichier original après conversion réussie
+      rm "$file"
+      echo "   🗑️  Original supprimé"
+    else
+      echo "   ❌ Erreur lors de la conversion"
+    fi
+  done
+
+  echo "-------------------------------------------"
+  echo "✨ Terminé : $processed/$count images converties en JPG"
+}

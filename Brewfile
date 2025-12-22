@@ -62,6 +62,5 @@ cask "whatsapp"
 mas "Amphetamine", id: 937984704
 mas "Pixelmator Pro", id: 1289583905
 mas "Transporter", id: 1450874784
-mas "Transmit 5", id: 1436522307
 mas "CleanMyMac", id: 1339170533
 mas "EXIF Tool : Metadata Tool", id: 1493735407

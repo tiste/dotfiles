@@ -7,7 +7,7 @@ export PATH="$PATH:$HOME/.rvm/bin"
 export PATH="$PATH:$HOME/.local/bin"
 export NVM_DIR="$HOME/nvm"
 
-export GDRIVE_DIR="$HOME/Mon Drive"
+export GDRIVE_DIR="$HOME/Library/CloudStorage/GoogleDrive-baptiste.lecocq@gmail.com/Mon Drive"
 export GCLOUD_DIR="$HOME/.config/gcloud"
 export GOOGLE_APPLICATION_CREDENTIALS="$GCLOUD_DIR/application_default_credentials.json"
 

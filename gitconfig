@@ -5,6 +5,7 @@
 
 [core]
   pager = diff-so-fancy | less
+	autocrlf = input
 
 [push]
   default = simple

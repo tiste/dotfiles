@@ -88,6 +88,101 @@ function resize-images() {
   echo "✨ Terminé : $processed/$count images redimensionnées"
 }
 
+function convert-to-mp4() {
+  local input_dir="$1"
+  local output_dir="$2"
+  local crf="${3:-28}"
+
+  if [ -z "$input_dir" ] || [ -z "$output_dir" ]; then
+    echo "Usage: convert-to-mp4 <dossier-source> <dossier-destination> [qualité]"
+    echo "Exemple: convert-to-mp4 ~/Desktop/Bat ~/Desktop/converted"
+    echo "         convert-to-mp4 ~/Desktop/Bat ~/Desktop/converted 28"
+    echo ""
+    echo "Convertit récursivement les fichiers VOB (et autres vidéos) en MP4."
+    echo "Qualité CRF : 0 (sans perte) → 51 (mauvais), défaut: 28"
+    return 1
+  fi
+
+  if ! command -v ffmpeg &> /dev/null; then
+    echo "❌ ffmpeg n'est pas installé. Lance : brew install ffmpeg"
+    return 1
+  fi
+
+  if [ ! -d "$input_dir" ]; then
+    echo "❌ Dossier source introuvable : $input_dir"
+    return 1
+  fi
+
+  local count=0
+  local processed=0
+  local failed=0
+
+  echo "🎬 Conversion VOB → MP4 : $input_dir"
+  echo "   → Destination : $output_dir"
+  echo "   → Qualité CRF : $crf"
+  echo "-------------------------------------------"
+
+  # Parcourir récursivement tous les fichiers vidéo
+  local files=()
+  while IFS= read -r -d '' file; do
+    files+=("$file")
+  done < <(find "$input_dir" -type f \( -iname "*.vob" -o -iname "*.avi" -o -iname "*.mkv" -o -iname "*.mov" -o -iname "*.mpg" -o -iname "*.mpeg" \) -print0 2>/dev/null)
+
+  if [ ${#files[@]} -eq 0 ]; then
+    echo "❌ Aucun fichier vidéo trouvé dans : $input_dir"
+    return 1
+  fi
+
+  echo "📂 ${#files[@]} fichier(s) trouvé(s)"
+  echo ""
+
+  for file in "${files[@]}"; do
+    count=$((count + 1))
+
+    # Reconstruire le chemin relatif pour préserver l'arborescence
+    local rel_path="${file#$input_dir/}"
+    local rel_dir=$(dirname "$rel_path")
+    local filename=$(basename "$file")
+    local name="${filename%.*}"
+
+    local dest_dir="$output_dir/$rel_dir"
+    local output="$dest_dir/${name}.mp4"
+
+    # Créer le dossier de destination si nécessaire
+    mkdir -p "$dest_dir"
+
+    echo "🎞️  [$count/${#files[@]}] $rel_path"
+    echo "   → ${output_dir}/${rel_dir}/${name}.mp4"
+
+    if ffmpeg -i "$file" \
+      -c:v libx264 \
+      -crf "$crf" \
+      -preset slow \
+      -c:a aac \
+      -b:a 128k \
+      -movflags +faststart \
+      "$output" \
+      -y \
+      -loglevel error \
+      2>&1; then
+      local input_size=$(du -sh "$file" 2>/dev/null | cut -f1)
+      local output_size=$(du -sh "$output" 2>/dev/null | cut -f1)
+      echo "   ✅ Converti (${input_size} → ${output_size})"
+      processed=$((processed + 1))
+    else
+      echo "   ❌ Erreur lors de la conversion"
+      failed=$((failed + 1))
+    fi
+    echo ""
+  done
+
+  echo "-------------------------------------------"
+  echo "✨ Terminé : $processed/$count fichier(s) converti(s) en MP4"
+  if [ "$failed" -gt 0 ]; then
+    echo "   ⚠️  $failed échec(s)"
+  fi
+}
+
 function convert-to-jpg() {
   local pattern="$1"
   local quality="${2:-90}"

@@ -258,3 +258,63 @@ function convert-to-jpg() {
 }
 
 alias k9s-opus='k9s --context gke_sp-glob-gke-nprd-cdp_europe-west1_nprd-02-a9ef --namespace cdp-opus-product-and-decision-frlm-uat1'
+
+netskope() {
+  local nsdiag="/Library/Application Support/Netskope/STAgent/nsdiag"
+  local bin="/Applications/Netskope Client.app/Contents/MacOS/Netskope Client"
+  local label="com.netskope.client.stagentui"
+  local uid plist
+  uid="$(id -u)"
+
+  [ -x "$nsdiag" ] || { echo "❌ nsdiag introuvable ($nsdiag) — Netskope installé ?" >&2; return 1; }
+
+  case "${1:-}" in
+    off)
+      "$nsdiag" -t disable >/dev/null 2>&1 && echo "🔴 filtrage désactivé (trafic direct)"
+      launchctl bootout "gui/$uid/$label" 2>/dev/null
+      sleep 1
+      if pgrep -f "MacOS/Netskope Client" | grep -qv systemextension; then
+        echo "⚠️  l'icône est encore là (relancée par le système)"
+      else
+        echo "🙈 icône fermée"
+      fi
+      echo "→ Netskope coupé. Réactive avec : netskope on"
+      ;;
+    on)
+      if pgrep -f "MacOS/Netskope Client" | grep -qv systemextension; then
+        echo "🙉 icône déjà ouverte"
+      else
+        # plist jetable : launchd le charge en mémoire au bootstrap, le fichier n'est plus utile ensuite.
+        plist="$(mktemp -t netskope-stagentui).plist"
+        cat > "$plist" <<PLIST
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key><string>$label</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>$bin</string>
+    <string>--launched-by-launchd</string>
+  </array>
+  <key>RunAtLoad</key><true/>
+  <key>KeepAlive</key><true/>
+</dict>
+</plist>
+PLIST
+        launchctl print "gui/$uid/$label" &>/dev/null && launchctl bootout "gui/$uid/$label" 2>/dev/null
+        launchctl bootstrap "gui/$uid" "$plist" 2>/dev/null
+        rm -f "$plist"
+        sleep 3
+        if pgrep -f "MacOS/Netskope Client" | grep -qv systemextension; then
+          echo "🙉 icône rouverte"
+        else
+          echo "⚠️  l'icône n'est pas revenue (rouvre l'appli ou redémarre)"
+        fi
+      fi
+      "$nsdiag" -t enable >/dev/null 2>&1 && echo "🟢 filtrage réactivé"
+      ;;
+    *)
+      echo "Usage: netskope on | off" >&2; return 2 ;;
+  esac
+}
